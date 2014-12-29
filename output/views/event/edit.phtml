@@ -1,7 +1,0 @@
-<a class="button" href="<?php echo $this->link(null,'index') ?>">Retour à la liste</a>
-<?php if ($this->id) { // si update ?>
-    <a class="button negative" onclick="return confirm('Voulez-vous réellement supprimer cet enregistrement ?');" href="<?php echo $this->link(null,'suppr',null,array('uid'=>$this->id))?>">Supprimer</a>
-<?php } ?>
-<div class="clear"></div>
-
-<?php echo $this->form ?>
