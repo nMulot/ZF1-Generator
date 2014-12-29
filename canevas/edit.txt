@@ -1,0 +1,35 @@
+    public function editAction()
+    {
+        $form = new <<FORM>>();
+        $model = new <<CLASSNAME>>();
+        $params = $this->getRequest()->getParams();
+        $isUpdate = isset($params['uid']);
+                
+        if ($isUpdate) {
+            $id = $params['uid'];
+            $obj = $model->info($id);
+            $values = array(
+                <<GETOBJ>>
+            );
+            $form->setDefaults($values);
+            $this->view->id = $id;
+            $this->view->title = "Modification <<CLASS>>";
+        } else {
+            $this->view->title = "Création <<CLASS>>";
+        }
+        
+        // Validation du form
+        if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
+            $values = $form->getValues();
+            
+            <<SETMODEL>>;
+                                
+            // Sauvegarde des modifs
+            $model->save();
+
+            $this->_redirect('<<CONTROLLER>>');
+        }
+
+        $form->setAction('');
+        $this->view->form = $form;
+    }

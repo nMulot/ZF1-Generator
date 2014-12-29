@@ -1,0 +1,26 @@
+<a class="button" href="<?php echo $this->link(null,'edit',null) ?>">Créer <<CLASS>></a>
+<div class="clear"></div>
+
+<?php echo $this->displayMessages($this->messages); ?>
+
+<?php 
+$th = array(
+    array('lib' => '', 'style'=>'width:45px;'),         // ex : array('lib'=>'', 'class'=>'foo bar', 'style'=>'foo:bar;'),
+<<HEADERS>>);
+
+$tr = array();
+foreach ($this->rows as $row) {
+    $link = $this->link(null,'edit',null,array('uid'=>$row->getId()));
+    $tr[] = array(
+        'attrib' => array(),    // ex : array('class'=>'foo', 'style'=>'bar')
+        'link' => $link,        // enlever si ligne non cliquable
+        'cols' => array(
+            '<a href="' . $this->link(null,'suppr',null,array('uid'=>$row->getId())) . '"><img src="' . $this->baseUrl('/images/icons/delete.png') . '" alt="Supprimer" title="Supprimer" /></a>'
+           .' <a href="' . $this->link(null,'edit',null,array('uid'=>$row->getId())) . '"><img src="' . $this->baseUrl('/images/icons/edit.png') . '" alt="Edit" title="Editer" /></a>',
+<<COLS>>        )
+    );
+}
+$large = false;     // width:100% si true
+echo $this->DisplayList($th, $tr, $large); 
+
+?>

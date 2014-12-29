@@ -1,0 +1,101 @@
+<?php
+
+class <<CLASSUC>>Controller extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        $this->view->title = "<<TITLE>>s";
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+        
+        if ($this->view->isAjaxRequest()) {
+            $this->_helper->layout()->disableLayout();
+        }
+    }
+
+    public function indexAction()
+    {
+        $model = new <<CLASSNAME>>();
+        $this->view->rows = $model->liste();
+    }
+
+    public function editAction()
+    {
+        $form = new <<FORM>>();
+        $model = new <<CLASSNAME>>();
+        $params = $this->getRequest()->getParams();
+        $isUpdate = isset($params['uid']);
+        
+        $defaults = array();
+        if ($isUpdate) {
+            $id = $params['uid'];
+            $obj = $model->info($id);
+            $defaults = array(
+                <<GETOBJ>>
+            );
+            $this->view->id = $id;
+            $this->view->title = "Modification <<TITLE>>";
+        } else {
+            $this->view->title = "Création <<TITLE>>";
+        }
+        
+        // Validation du form
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+            $values = $form->getValues();
+
+            if (isset($values['id']) && $values['id'] != null) {
+                $model->info($values['id']);
+            }
+            <<SETMODEL>>;
+                                
+            // Sauvegarde des modifications
+            $model->save();
+
+            $this->_helper->redirector('index', '<<CONTROLLER>>');
+        }
+
+        $form->setDefaults($defaults);
+        $form->setAction('');
+        $this->view->form = $form;
+    }
+    
+    public function supprAction()
+    {
+        $model = new <<CLASSNAME>>();
+        $params = $this->getRequest()->getParams();
+        
+        if ($this->getRequest()->isPost()) {
+            if (isset($params['confirm_delete'])) { // Suppression confirmée
+                $model->info($params['id']);
+                if ($model->suppr()) { // id provenant du form
+                    $this->_helper->flashMessenger->addMessage("Suppression effectuée avec succès");
+                    $this->_helper->redirector('index', '<<CONTROLLER>>');
+                } else {
+                    $this->_helper->flashMessenger->addMessage("Une erreur est survenue lors de la suppression");
+                }
+            } elseif (isset($params['cancel'])) {
+                $this->_helper->flashMessenger->addMessage("Suppression annulée");
+                $this->_helper->redirector('index', '<<CONTROLLER>>');
+            }
+        } elseif (!isset($params['uid'])) {
+            $this->_helper->flashMessenger->addMessage("Aucun enregistrement à supprimer");
+            $this->_helper->redirector('index', '<<CONTROLLER>>');
+        }
+        
+        // Affichage du form de confirmation
+        $this->view->id = $params['uid'];
+    }
+
+    public function infoAction()
+    {
+        $params = $this->getRequest()->getParams();
+        
+        if (!isset($params['uid'])) {
+            $this->_helper->redirector('index', '<<CONTROLLER>>');
+        } 
+        
+        $this->view->uid = $params['uid'];            
+        $this->view->title = "Détails <<TITLE>>";
+    }
+
+}

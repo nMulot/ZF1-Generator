@@ -1,0 +1,17 @@
+<?php 
+$model = new <<CLASSNAME>>();
+$model->info($this->uid);
+?>
+
+<a class="button" href="<?php echo $this->link(null,'index') ?>">Retour à la liste</a>
+<a class="button" href="<?php echo $this->link(null,'edit',null,array('uid'=>$this->uid))?>">Modifier les informations</a>
+<div class="clear"></div>
+
+<?php 
+$title = '<<CLASSUC>>';
+
+$rows = array();
+<<ROWS>>
+
+echo $this->displayInfo($rows, $title);
+?>

@@ -1,0 +1,9 @@
+// <<FIELD>>
+        $<<FIELD>> = new Zend_Form_Element_Text('<<FIELD>>');
+        $<<FIELD>>
+            ->setRequired(true)
+            ->setAttrib('class','med')
+            ->setLabel('<<LABEL>>');
+        $this->addElement($<<FIELD>>);
+        
+        

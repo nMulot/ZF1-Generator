@@ -1,0 +1,25 @@
+<?php 
+$model = new Model_Event();
+$model->info($this->uid);
+?>
+
+<a class="button" href="<?php echo $this->link(null,'index') ?>">Retour à la liste</a>
+<a class="button" href="<?php echo $this->link(null,'edit',null,array('uid'=>$this->uid))?>">Modifier les informations</a>
+<div class="clear"></div>
+
+<?php 
+$title = 'Event';
+
+$rows = array();
+$rows[] = array('Id' => $model->getId());
+$rows[] = array('Nom' => $model->getNom());
+$rows[] = array('Date heure' => $model->getDate_heure());
+$rows[] = array('Description' => $model->getDescription());
+$rows[] = array('Url' => $model->getUrl());
+$rows[] = array('Date insert' => $model->getDate_insert());
+$rows[] = array('Actif' => $model->getActif());
+$rows[] = array('Prix' => $model->getPrix());
+
+
+echo $this->displayInfo($rows, $title);
+?>

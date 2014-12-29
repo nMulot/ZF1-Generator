@@ -1,0 +1,11 @@
+    public function get<<PROPRIETE>>()
+    {
+        return $this->_<<FIELD>>;
+    }
+
+    public function set<<PROPRIETE>>($<<FIELD>>)
+    {
+        $this->_<<FIELD>> = $<<FIELD>>;
+        return $this;
+    }
+

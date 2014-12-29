@@ -1,0 +1,29 @@
+<?php 
+$model = new Model_Participant();
+$model->info($this->uid);
+?>
+
+<a class="button" href="<?php echo $this->link(null,'index') ?>">Retour à la liste</a>
+<a class="button" href="<?php echo $this->link(null,'edit',null,array('uid'=>$this->uid))?>">Modifier les informations</a>
+<div class="clear"></div>
+
+<?php 
+$title = 'Participant';
+
+$rows = array();
+$rows[] = array('Id' => $model->getId());
+$rows[] = array('Date insert' => $model->getDate_insert());
+$rows[] = array('Nom' => $model->getNom());
+$rows[] = array('Prenom' => $model->getPrenom());
+$rows[] = array('Mail' => $model->getMail());
+$rows[] = array('Tel mobile' => $model->getTel_mobile());
+$rows[] = array('Nb invites' => $model->getNb_invites());
+$rows[] = array('Montant' => $model->getMontant());
+$rows[] = array('Mode reglement' => $model->getMode_reglement());
+$rows[] = array('Encaisse' => $model->getEncaisse());
+$rows[] = array('Users id' => $model->getUsers_id());
+$rows[] = array('Event id' => $model->getEvent_id());
+
+
+echo $this->displayInfo($rows, $title);
+?>

@@ -1,0 +1,50 @@
+<a class="button" href="<?php echo $this->link(null,'edit',null) ?>">Créer participant</a>
+<div class="clear"></div>
+
+<?php echo $this->displayMessages($this->messages); ?>
+
+<?php 
+$th = array(
+    array('lib' => '', 'style'=>'width:45px;'),         // ex : array('lib'=>'', 'class'=>'foo bar', 'style'=>'foo:bar;'),
+    array('lib' => 'Id'),
+    array('lib' => 'Date insert'),
+    array('lib' => 'Nom'),
+    array('lib' => 'Prenom'),
+    array('lib' => 'Mail'),
+    array('lib' => 'Tel mobile'),
+    array('lib' => 'Nb invites'),
+    array('lib' => 'Montant'),
+    array('lib' => 'Mode reglement'),
+    array('lib' => 'Encaisse'),
+    array('lib' => 'Users id'),
+    array('lib' => 'Event id'),
+);
+
+$tr = array();
+foreach ($this->rows as $row) {
+    $link = $this->link(null,'edit',null,array('uid'=>$row->getId()));
+    $tr[] = array(
+        'attrib' => array(),    // ex : array('class'=>'foo', 'style'=>'bar')
+        'link' => $link,        // enlever si ligne non cliquable
+        'cols' => array(
+            '<a href="' . $this->link(null,'suppr',null,array('uid'=>$row->getId())) . '"><img src="' . $this->baseUrl('/images/icons/delete.png') . '" alt="Supprimer" title="Supprimer" /></a>'
+           .' <a href="' . $this->link(null,'edit',null,array('uid'=>$row->getId())) . '"><img src="' . $this->baseUrl('/images/icons/edit.png') . '" alt="Edit" title="Editer" /></a>',
+            $row->getId(),
+            $row->getDate_insert(),
+            $row->getNom(),
+            $row->getPrenom(),
+            $row->getMail(),
+            $row->getTel_mobile(),
+            $row->getNb_invites(),
+            $row->getMontant(),
+            $row->getMode_reglement(),
+            $row->getEncaisse(),
+            $row->getUsers_id(),
+            $row->getEvent_id(),
+        )
+    );
+}
+$large = false;     // width:100% si true
+echo $this->DisplayList($th, $tr, $large); 
+
+?>

@@ -1,0 +1,12 @@
+<form action="" method="post">
+    <table>
+    <tr><td colspan="2">
+        <p>Voulez-vous réellement supprimer cet enregistrement ? <br />Cette action est irreversible.</p>
+        <input type="hidden" name="id" value="<?php echo $this->id ?>" />
+    </td></tr>
+    <tr>
+        <td style="text-align:center;"><input type="submit" name="cancel" value="Annuler" /></td>
+        <td style="text-align:center;"><input type="submit" name="confirm_delete" value="Supprimer" /></td>
+    </tr>
+    </table>
+</form>
