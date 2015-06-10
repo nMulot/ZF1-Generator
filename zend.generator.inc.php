@@ -5,6 +5,8 @@
  * @author Dina Rajaonson 10-2011
  *
  */
+require_once 'config/config.php';
+
 class Zend_Generator
 {	
 	protected $_naming = null;
@@ -25,7 +27,7 @@ class Zend_Generator
     {
         
         try {
-            $conn = new PDO('mysql:host=127.0.0.1', 'root', '');
+			$conn = new PDO('mysql:host='.DB_SERVER,DB_USER,DB_PASSWD);
             $this->conn = $conn;
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -36,7 +38,7 @@ class Zend_Generator
     public function connectDb($db)
 	{
 		try {
-			$conn = new PDO('mysql:host=127.0.0.1;dbname='.$db, 'root', '');
+			$conn = new PDO('mysql:host='.DB_SERVER.';dbname='.$db,DB_USER,DB_PASSWD);
 			$this->conn = $conn;
 		} catch (PDOException $e) {
 			echo "Erreur : ". $e->getMessage();
